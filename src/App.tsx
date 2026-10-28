@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
+import Faq from './components/Faq';
 import BackToTop from './components/BackToTop';
 
 function App() {
@@ -22,11 +23,14 @@ function App() {
         {/* Hero Section (#beranda) */}
         <Hero onLoginClick={() => alert('Masuk Sekarang diklik!')} />
 
-        {/* About / Tentang Section (#tentang) */}
+        {/* About Section (#tentang) */}
         <About />
 
-        {/* Services / Layanan Section (#our-services) */}
+        {/* Services Section (#our-services) */}
         <Services />
+
+        {/* FAQ Section (#faq) */}
+        <Faq />
       </main>
 
       {/* Floating Back to Top Button */}
