@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import About from './components/About';
+import Services from './components/Services';
+import BackToTop from './components/BackToTop';
 
 function App() {
   const [activeSection, setActiveSection] = useState('beranda');
@@ -14,10 +17,20 @@ function App() {
         onLoginClick={() => alert('Tombol Login diklik!')}
       />
 
-      {/* Hero Section */}
+      {/* Main Content */}
       <main>
+        {/* Hero Section (#beranda) */}
         <Hero onLoginClick={() => alert('Masuk Sekarang diklik!')} />
+
+        {/* About / Tentang Section (#tentang) */}
+        <About />
+
+        {/* Services / Layanan Section (#our-services) */}
+        <Services />
       </main>
+
+      {/* Floating Back to Top Button */}
+      <BackToTop />
     </div>
   );
 }

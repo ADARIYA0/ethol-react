@@ -38,14 +38,15 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       setIsScrolled(window.scrollY > scrollThreshold);
 
-      if (!activeSectionProp) {
-        const sectionIds = NAV_ITEMS.map((item) => item.id);
-        for (let i = sectionIds.length - 1; i >= 0; i--) {
-          const el = document.getElementById(sectionIds[i]);
-          if (el && window.scrollY >= el.offsetTop - 100) {
-            setInternalActive(sectionIds[i]);
-            break;
+      const sectionIds = NAV_ITEMS.map((item) => item.id);
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
+        if (el && window.scrollY >= el.offsetTop - 120) {
+          setInternalActive(sectionIds[i]);
+          if (onNavigate && sectionIds[i] !== activeSectionProp) {
+            onNavigate(sectionIds[i]);
           }
+          break;
         }
       }
     };
@@ -54,17 +55,16 @@ export const Navbar: React.FC<NavbarProps> = ({
     handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [activeSectionProp]);
+  }, [activeSectionProp, onNavigate]);
 
   const handleNavClick = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setInternalActive(id);
     if (onNavigate) {
       onNavigate(id);
-    } else {
-      setInternalActive(id);
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
     }
     setIsMenuOpen(false);
   };
@@ -92,7 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             e.preventDefault();
             handleNavClick('beranda');
           }}
-          className="inline-flex items-center"
+          className="inline-flex items-center cursor-pointer"
         >
           <img
             src="/ethol.png"
